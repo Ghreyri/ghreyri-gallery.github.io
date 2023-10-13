@@ -11,11 +11,11 @@ $mail = new PHPMailer(true);
 
 try {
     // Konfigurasi SMTP
-    $mail->isSMTP();
+    $mail->IsSMTP();
     $mail->Host = 'smtp.gmail.com'; // Ganti dengan server SMTP yang sesuai
     $mail->SMTPAuth = true;
     $mail->Username = 'Alquinsha1998@gmail.com'; // Ganti dengan alamat email Anda
-    $mail->Password = '123Manufaktur'; // Ganti dengan kata sandi email Anda
+    $mail->Password = 'zinxixwoerxtpece'; // Ganti dengan kata sandi email Anda zinx ixwo erxt pece
     $mail->SMTPSecure = 'ssl'; // Anda dapat mengganti ini menjadi 'ssl' jika sesuai
     $mail->Port = 465; // Ganti dengan port SMTP yang sesuai
 
