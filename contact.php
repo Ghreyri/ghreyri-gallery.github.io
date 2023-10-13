@@ -2,36 +2,37 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/PHPMailer.php';
-require 'PHPMailer/Exception.php';
-require 'phpMailer/SMTP.php'
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['contact_name'];
-    $email = $_POST['contact_email'];
-    $message = $_POST['contact_message'];
+// Inisialisasi PHPMailer
+$mail = new PHPMailer(true);
 
-    // Konfigurasi PHPMailer
-    $mail = new PHPMailer(true);
-    $mail->IsSMTP();
-    $mail->Host = 'smtp.gmail.com'; // Ganti dengan server SMTP yang sesuai fnde juky rsdx wxqm
+try {
+    // Konfigurasi SMTP
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com'; // Ganti dengan server SMTP yang sesuai
     $mail->SMTPAuth = true;
-    $mail->Username = 'Alquinsha1998@gmail.com'; // Ganti dengan alamat email Gmail Anda
-    $mail->Password = '123Manufaktur'; // Ganti dengan kata sandi Gmail Anda
-    $mail->SMTPSecure = 'ssl';
-    $mail->Port = 465;
+    $mail->Username = 'Alquinsha1998@gmail.com'; // Ganti dengan alamat email Anda
+    $mail->Password = '123Manufaktur'; // Ganti dengan kata sandi email Anda
+    $mail->SMTPSecure = 'ssl'; // Anda dapat mengganti ini menjadi 'ssl' jika sesuai
+    $mail->Port = 465; // Ganti dengan port SMTP yang sesuai
 
-    // Pengaturan email
-    $mail->setFrom('Alquinsha1998@gmail.com');
-    $mail->addAddress($mail); // Ganti dengan alamat email tujuan
-    $mail->Subject = 'Pesan dari ' . $name;
-    $mail->Body = $message;
+    // Pengirim dan penerima
+    $mail->setFrom('Alquinsha1998@example.com', 'Ghrayri Gallery');
+    $mail->addAddress('Alquinsha1998@example.com', 'Ghrayri Gallery'); // Ganti dengan alamat penerima
 
-    try {
-        $mail->send();
-        echo 'Pesan Anda telah terkirim.';
-    } catch (Exception $e) {
-        echo 'Pesan gagal terkirim. Error: ' . $mail->ErrorInfo;
-    }
+    // Isi email
+    $mail->isHTML(true);
+    $mail->Subject = 'Subject of the email';
+    $mail->Body = 'This is the HTML message body';
+
+    // Kirim email
+    $mail->send();
+    echo 'Email has been sent';
+
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 ?>
