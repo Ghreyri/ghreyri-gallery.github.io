@@ -7,11 +7,11 @@ require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
 // Inisialisasi PHPMailer
-$mail = new PHPMailer(true);
+if(isset($_POST["Send"])){
+    $mail = new PHPMailer(true);
 
-try {
     // Konfigurasi SMTP
-    $mail->IsSMTP();
+    $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com'; // Ganti dengan server SMTP yang sesuai
     $mail->SMTPAuth = true;
     $mail->Username = 'Alquinsha1998@gmail.com'; // Ganti dengan alamat email Anda
@@ -20,19 +20,27 @@ try {
     $mail->Port = 465; // Ganti dengan port SMTP yang sesuai
 
     // Pengirim dan penerima
-    $mail->setFrom('Alquinsha1998@example.com', 'Ghrayri Gallery');
-    $mail->addAddress('Alquinsha1998@example.com', 'Ghrayri Gallery'); // Ganti dengan alamat penerima
+    $mail->setFrom('Alquinsha1998@example.com'); // Ganti dengan alamat penerima
+    $mail->addAddress($_POST["Email"]); 
 
     // Isi email
     $mail->isHTML(true);
-    $mail->Subject = 'Subject of the email';
-    $mail->Body = 'This is the HTML message body';
+    $mail->Subject = $_POST["Name"];
+    $mail->Body = $_POST["Message"];
 
     // Kirim email
     $mail->send();
-    echo 'Email has been sent';
+    
+    echo
+    
+    "
+    <script>
+    alert('Sent Successfully');
+    document.location.href = 'Ghrayri-color.html';
+    document.location.href = 'Ghrayri-gray.html';
+    </script>
+    ";
 
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
+
 ?>
